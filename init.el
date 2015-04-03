@@ -600,3 +600,60 @@ endmodule
  (load (expand-file-name "~/quicklisp/slime-helper.el"))
   ;; Replace "sbcl" with the path to your implementation
   (setq inferior-lisp-program "sbcl")
+
+
+;; mac specific stuff
+(if (eq system-type 'darwin)
+					;(setq mac-option-modifier 'control)
+    (setq mac-command-modifier 'control) 
+  (setq exec-path (cons "/usr/local/bin" exec-path))
+					; merge mac clipboard with emacs clipboard (ahh, nice!)
+  (setq x-select-enable-clipboard t)
+
+  (setq mac-option-modifier 'meta)
+  ; something for OS X if true
+  ; optional something if not
+)
+
+
+
+
+
+
+
+; from http://mpastell.com/pweave/emacs.html
+;Pnw-mode for Pweave reST documents
+(defun Pnw-mode ()
+       (require 'noweb-font-lock-mode)
+       (noweb-mode)
+       (setq noweb-default-code-mode 'python-mode)
+       (setq noweb-doc-mode 'rst-mode))
+
+(setq auto-mode-alist (append (list (cons "\\.Pnw$" 'Pnw-mode))
+                   auto-mode-alist))
+
+;Plw-mode for Pweave Latex documents
+(defun Plw-mode ()
+       (require 'noweb-font-lock-mode)
+       (noweb-mode)
+       (setq noweb-default-code-mode 'python-mode)
+       (setq noweb-doc-mode 'latex-mode))
+
+(setq auto-mode-alist (append (list (cons "\\.Plw$" 'Plw-mode))
+                   auto-mode-alist))
+
+
+
+
+
+; slime/sbcl/lisp stuff
+(keyboard-translate ?\( ?\()
+(keyboard-translate ?\[ ?\[)
+(keyboard-translate ?\) ?\))
+(keyboard-translate ?\] ?\])
+
+
+(require 'ein)
+
+
+
