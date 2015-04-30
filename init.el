@@ -1,5 +1,6 @@
 (setq inhibit-splash-screen t)
 (print "Starting to process .emacs")
+(add-to-list 'load-path "~/.emacs.d/elisp")
 (tool-bar-mode -1)
 ;(require 'site-gentoo)
 
@@ -661,3 +662,8 @@ endmodule
 
 
 
+
+
+; window numbering
+(require 'window-number)
+(window-number-mode)
