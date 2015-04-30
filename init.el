@@ -43,7 +43,7 @@
 
 ;(setq slime-truncate-lines nil)
 (setq split-width-threshold 200)
-(set-default-font "Consolas-10")
+
 
 
 ;; (if (= emacs-major-version 23)
@@ -82,8 +82,6 @@
 
 
 ;; hack to detect if this an oldish version of emacs (specfically if the 1's place is 1, eg emacs v 21.3.1)
-(unless (eq 49 (aref emacs-version 1))
-  (set-default-font "Consolas-10"))
 
 ;(set-default-font "Consolas-6")
 ;(set-default-font "ProFont-9")
@@ -604,13 +602,19 @@ endmodule
 
 ;; mac specific stuff
 (if (eq system-type 'darwin)
+    (progn 
 					;(setq mac-option-modifier 'control)
     (setq mac-command-modifier 'control) 
   (setq exec-path (cons "/usr/local/bin" exec-path))
 					; merge mac clipboard with emacs clipboard (ahh, nice!)
   (setq x-select-enable-clipboard t)
 
-  (setq mac-option-modifier 'meta)
+  (setq mac-option-modifier 'meta))
+
+  ;(set-default-font "Consolas-10")
+  (unless (eq 49 (aref emacs-version 1))
+    (set-default-font "Consolas-10"))
+
   ; something for OS X if true
   ; optional something if not
 )
