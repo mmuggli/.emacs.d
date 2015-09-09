@@ -667,3 +667,6 @@ endmodule
 ; window numbering
 (require 'window-number)
 (window-number-mode)
+
+(global-set-key (kbd "C-c g") 'magit-status)
+
