@@ -670,3 +670,5 @@ endmodule
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
