@@ -62,15 +62,25 @@
 
 (when (>= emacs-major-version 24)
   (require 'package)
+
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
+;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
 
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
+(package-initialize)
 
-
+;; (when (>= emacs-major-version 24)
+;;   (require 'package)
+;;   (package-initialize)
+;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;   )
 
 
  (setq browse-url-browser-function 'w3m-browse-url)
@@ -447,7 +457,10 @@ ip-address ? "))
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(package-selected-packages
    (quote
-    (clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex))))
+
+    (clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -497,7 +510,15 @@ endmodule
 ;;             `(begin (load ,(expand-file-name zip)) (start-swank ,file)))))
 
 
+;;(require 'package)
+;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpax" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives 
+;;     '("marmalade" .
+;;       "http://marmalade-repo.org/packages/") t)
 
+;;(package-initialize)
 
 
 ;; (setq
@@ -597,7 +618,7 @@ endmodule
     (progn 
 					;(setq mac-option-modifier 'control)
     (setq mac-command-modifier 'control) 
-  (setq exec-path (cons "/usr/local/bin" exec-path))
+  (setq exec-path (cons "/Applications/ghc-7.10.3.app/Contents/bin" (cons "/usr/local/bin" exec-path)))
 					; merge mac clipboard with emacs clipboard (ahh, nice!)
   (setq x-select-enable-clipboard t)
 
@@ -665,6 +686,7 @@ endmodule
 
 
 
+
 (defun string/reverse (str)
   "Reverse the str where str is a string"
   (apply #'string
@@ -697,3 +719,48 @@ endmodule
 ;(add-to-list 'eshell-visual-commands "htop")
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+
+(defun ales/fill-paragraph (&optional P)
+  "When called with prefix argument call `fill-paragraph'.
+Otherwise split the current paragraph into one sentence per line."
+  (interactive "P")
+  (if (not P)
+      (save-excursion 
+        (let ((fill-column 12345678)) ;; relies on dynamic binding
+          (fill-paragraph) ;; this will not work correctly if the paragraph is
+                           ;; longer than 12345678 characters (in which case the
+                           ;; file must be at least 12MB long. This is unlikely.)
+          (let ((end (save-excursion
+                       (forward-paragraph 1)
+                       (backward-sentence)
+                       (point-marker))))  ;; remember where to stop
+            (beginning-of-line)
+            (while (progn (forward-sentence)
+                          (<= (point) (marker-position end)))
+              (just-one-space) ;; leaves only one space, point is after it
+              (delete-char -1) ;; delete the space
+              (newline)        ;; and insert a newline
+             ; (LaTeX-indent-line) ;; I only use this in combination with late, so this makes sense
+              ))))
+    ;; otherwise do ordinary fill paragraph
+    (fill-paragraph P)))
+
+
+(global-set-key (kbd "M-q") 'ales/fill-paragraph)
+(put 'downcase-region 'disabled nil)
+
+
+(require 'ox-latex)
+(unless (boundp 'org-latex-classes)
+  (setq org-latex-classes nil))
+(add-to-list 'org-latex-classes
+             '("article"
+               "\\documentclass{article}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(setq org-export-headline-levels 10)
+(setq truncate-lines nil)
+
