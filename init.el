@@ -87,7 +87,9 @@
 ;(set-default-font "Consolas-6")
 ;(set-default-font "ProFont-9")
 ;; (insert (prin1-to-string (w32-select-font))) (determine font in use)
-
+(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
+(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
+(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-14-*-*-*-*-0-iso10646-1")
 (if  (eq system-type 'windows-nt)
 
     (progn ;; Windows stuff
@@ -447,7 +449,11 @@ ip-address ? "))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space"))))
+ '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
+ '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
+ '(package-selected-packages
+   (quote
+    (visual-fill-column clojure-mode cider magit haskell-mode ein doremi auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -668,5 +674,27 @@ endmodule
 (require 'window-number)
 (window-number-mode)
 
+(window-number-meta-mode)
+
 (global-set-key (kbd "C-c g") 'magit-status)
 
+(add-to-list `exec-path "/home/muggli/local/bin")
+(setenv "SBCL_HOME" nil)
+
+(setenv "LD_LIBRARY_PATH" "/home/muggli/git/cosmo/3rd_party_inst/boost/lib")
+
+(setq compilation-skip-threshold 2)
+(setq compilation-auto-jump-to-first-error nil)
+
+(defun comint-fix-window-size ()
+  "Change process window size."
+  (when (derived-mode-p 'comint-mode)
+    (set-process-window-size (get-buffer-process (current-buffer))
+                         (window-height)
+                         (window-width))))
+
+(defun my-shell-mode-hook ()
+  ;; add this hook as buffer local, so it runs once per window.
+  (add-hook 'window-configuration-change-hook 'comint-fix-window-size nil t))
+
+(add-hook 'shell-mode-hook 'my-shell-mode-hook)
