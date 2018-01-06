@@ -63,6 +63,9 @@
 (when (>= emacs-major-version 24)
   (require 'package)
 
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
 ;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
 
@@ -78,6 +81,7 @@
 ;;   (package-initialize)
 ;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;;   )
+
 
  (setq browse-url-browser-function 'w3m-browse-url)
  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
@@ -461,7 +465,10 @@ ip-address ? "))
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(package-selected-packages
    (quote
-    (visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+
+    (clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -522,18 +529,17 @@ endmodule
 ;;(package-initialize)
 
 
-
-(setq
- python-shell-interpreter "ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "In \\[[0-9]+\\]: "
- python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
- python-shell-completion-setup-code
-   "from IPython.core.completerlib import module_completion"
- python-shell-completion-module-string-code
-   "';'.join(module_completion('''%s'''))\n"
- python-shell-completion-string-code
-   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+;; (setq
+;;  python-shell-interpreter "ipython"
+;;  python-shell-interpreter-args ""
+;;  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+;;  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+;;  python-shell-completion-setup-code
+;;    "from IPython.core.completerlib import module_completion"
+;;  python-shell-completion-module-string-code
+;;    "';'.join(module_completion('''%s'''))\n"
+;;  python-shell-completion-string-code
+;;    "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -672,7 +678,7 @@ endmodule
 (keyboard-translate ?\] ?\])
 
 
-(require 'ein)
+;(require 'ein)
 
 
 
@@ -710,6 +716,41 @@ endmodule
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
+
+
+
+(defun string/reverse (str)
+  "Reverse the str where str is a string"
+  (apply #'string
+         (reverse
+                (string-to-list str))))
+
+
+
+(when (and (fboundp 'server-start)); (string-equal (getenv "TERM") 'xterm))
+  (server-start)
+  (defun fp-kill-server-with-buffer-routine ()
+    (and server-buffer-clients (server-done)))
+  (add-hook 'kill-buffer-hook 'fp-kill-server-with-buffer-routine))
+
+(setenv "EDITOR" "emacsclient")
+;(require 'python-mode)
+(require 'python)
+
+;(require 'ipython)
+
+
+
+(setq py-python-command-args '("--matplotlib" "--colors" "LightBG"))
+
+(setq backup-directory-alist
+      `((".*" . ,"~/.emacs-autosave/")))
+(setq auto-save-file-name-transforms
+                `((".*" ,"~/.emacs-autosave/" t)))
+
+;(add-to-list 'eshell-visual-commands "htop")
+
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 
 (defun ales/fill-paragraph (&optional P)
   "When called with prefix argument call `fill-paragraph'.
