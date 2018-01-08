@@ -94,9 +94,9 @@
 ;(set-default-font "Consolas-6")
 ;(set-default-font "ProFont-9")
 ;; (insert (prin1-to-string (w32-select-font))) (determine font in use)
-(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
-(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
-(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-14-*-*-*-*-0-iso10646-1")
+;(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-12-*-*-*-*-0-iso10646-1")
+;(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-13-*-*-*-*-0-iso10646-1")
+;(set-default-font "-ADBO-Source Serif Pro-normal-normal-normal-*-14-*-*-*-*-0-iso10646-1")
 (if  (eq system-type 'windows-nt)
 
     (progn ;; Windows stuff
