@@ -65,13 +65,13 @@
 
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
+;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
 ;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
 
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
+;                         ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
 (package-initialize)
@@ -456,17 +456,12 @@ ip-address ? "))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
+ '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)) t)
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
+ '(nanowrimo-today-goal 12500)
  '(package-selected-packages
    (quote
-    (visual-fill-column clojure-mode cider magit haskell-mode ein doremi auctex)))
- '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
- '(package-selected-packages
-   (quote
-
-    (clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+    (lsp-haskell exwm nanowrimo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
 
 
 (custom-set-faces
@@ -796,3 +791,21 @@ Otherwise split the current paragraph into one sentence per line."
 (setq org-export-headline-levels 10)
 (setq truncate-lines nil)
 
+ (global-set-key [mouse-8] nil)
+ 
+
+(require 'mouse-copy)
+(global-set-key [down-mouse-8] 'mouse-drag-secondary-pasting)
+(global-set-key [down-mouse-9] 'mouse-drag-secondary-moving)
+
+(defun occur-non-ascii ()
+  "Find any non-ascii characters in the current buffer."
+  (interactive)
+  (occur "[^[:ascii:]]"))
+
+
+(require 'lsp)
+(require 'lsp-haskell)
+(require 'haskell)
+(add-hook 'haskell-mode-hook #'lsp)
+(lsp turn-on-haskell-indent turn-on-haskell-simple-indent)
