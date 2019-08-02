@@ -1,5 +1,6 @@
 (setq inhibit-splash-screen t)
 (print "Starting to process .emacs")
+;(require 'labburn-theme)
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (tool-bar-mode -1)
 ;(require 'site-gentoo)
@@ -63,18 +64,20 @@
 (when (>= emacs-major-version 24)
   (require 'package)
 
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
+
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
 ;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize)
+
   )
 
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+;; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+;;  ;                        ("marmalade" . "http://marmalade-repo.org/packages/")
+;;                          ("melpa" . "https://melpa.org/packages/")))
 
-(package-initialize)
+;; (package-initialize)
 
 ;; (when (>= emacs-major-version 24)
 ;;   (require 'package)
@@ -456,17 +459,14 @@ ip-address ? "))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
+ '(custom-safe-themes
+   (quote
+    ("80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
  '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(package-selected-packages
    (quote
-    (visual-fill-column clojure-mode cider magit haskell-mode ein doremi auctex)))
- '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
- '(package-selected-packages
-   (quote
-
-    (clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+    (md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
 
 
 (custom-set-faces
@@ -795,4 +795,26 @@ Otherwise split the current paragraph into one sentence per line."
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 (setq org-export-headline-levels 10)
 (setq truncate-lines nil)
+
+(set-default 'truncate-lines nil)
+(setq truncate-partial-width-windows nil)
+(setq org-startup-truncated nil)
+
+;; may slow down emacs
+;; update the mode line to have line number and column number
+;; (setq mode-line-position 
+;;       '("%p (%l," (:eval (format "%d)" (1+ (current-column))))))
+;; ;; force the update of the mode line so the column gets updated
+;; (add-hook 'post-command-hook 'force-mode-line-update)
+
+(setq column-number-indicator-zero-based nil)
+
+(defun gcm-scroll-down ()
+  (interactive)
+  (scroll-up 1))
+(defun gcm-scroll-up ()
+  (interactive)
+  (scroll-down 1))
+(global-set-key [(control down)] 'gcm-scroll-down)
+(global-set-key [(control up)]   'gcm-scroll-up)
 
