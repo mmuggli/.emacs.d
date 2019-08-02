@@ -57,36 +57,27 @@
 
 ;;  (require 'w3m-load)
 
-(add-to-list 'load-path "/home/muggli/emacs-library/haskell-mode-2.8.0")
+;(add-to-list 'load-path "/home/muggli/emacs-library/haskell-mode-2.8.0")
  (setq tramp-default-method "ssh")
 (setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/oak")
 
 (when (>= emacs-major-version 24)
   (require 'package)
 
-<<<<<<< HEAD
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-=======
 
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
->>>>>>> f9f597ec461b527d77fdb3beff4f4df054f5b02a
+
 ;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
 ;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize)
-
-  )
+  (package-initialize))
 
 
-<<<<<<< HEAD
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-;                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
-=======
+
+
 ;; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 ;;  ;                        ("marmalade" . "http://marmalade-repo.org/packages/")
 ;;                          ("melpa" . "https://melpa.org/packages/")))
->>>>>>> f9f597ec461b527d77fdb3beff4f4df054f5b02a
+
 
 ;; (package-initialize)
 
@@ -813,7 +804,7 @@ Otherwise split the current paragraph into one sentence per line."
 (setq org-export-headline-levels 10)
 (setq truncate-lines nil)
 
-<<<<<<< HEAD
+
  (global-set-key [mouse-8] nil)
  
 
@@ -831,8 +822,8 @@ Otherwise split the current paragraph into one sentence per line."
 (require 'lsp-haskell)
 (require 'haskell)
 (add-hook 'haskell-mode-hook #'lsp)
-(lsp turn-on-haskell-indent turn-on-haskell-simple-indent)
-=======
+;(lsp turn-on-haskell-indent turn-on-haskell-simple-indent)
+
 (set-default 'truncate-lines nil)
 (setq truncate-partial-width-windows nil)
 (setq org-startup-truncated nil)
@@ -855,4 +846,4 @@ Otherwise split the current paragraph into one sentence per line."
 (global-set-key [(control down)] 'gcm-scroll-down)
 (global-set-key [(control up)]   'gcm-scroll-up)
 
->>>>>>> f9f597ec461b527d77fdb3beff4f4df054f5b02a
+
