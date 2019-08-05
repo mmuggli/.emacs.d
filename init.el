@@ -461,19 +461,15 @@ ip-address ? "))
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)) t)
-
  '(custom-safe-themes
    (quote
     ("80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
-
-
+ '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(nanowrimo-today-goal 12500)
  '(package-selected-packages
    (quote
-    (lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+    (intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
 
 
 
@@ -818,10 +814,10 @@ Otherwise split the current paragraph into one sentence per line."
   (occur "[^[:ascii:]]"))
 
 
-(require 'lsp)
-(require 'lsp-haskell)
-(require 'haskell)
-(add-hook 'haskell-mode-hook #'lsp)
+;; (require 'lsp)
+;; (require 'lsp-haskell)
+;; (require 'haskell)
+;; (add-hook 'haskell-mode-hook #'lsp)
 ;(lsp turn-on-haskell-indent turn-on-haskell-simple-indent)
 
 (set-default 'truncate-lines nil)
