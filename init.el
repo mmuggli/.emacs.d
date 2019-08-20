@@ -469,7 +469,7 @@ ip-address ? "))
  '(nanowrimo-today-goal 12500)
  '(package-selected-packages
    (quote
-    (intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+    (restclient yaml-mode intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
 
 
 
@@ -801,7 +801,8 @@ Otherwise split the current paragraph into one sentence per line."
 (setq truncate-lines nil)
 
 
- (global-set-key [mouse-8] nil)
+(global-set-key [mouse-6] 'previous-buffer)
+(global-set-key [mouse-7] 'next-buffer)
  
 
 (require 'mouse-copy)
