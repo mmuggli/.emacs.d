@@ -928,3 +928,12 @@ Otherwise split the current paragraph into one sentence per line."
             (local-set-key (kbd "C-c C-d") #'intero-mode)))
 (global-set-key (kbd "C-c C-n") 'intero-restart)
 (global-set-key (kbd "C-c C-d") 'intero-mode)
+
+;; Bionano windows setup
+(push "c:/msys64/usr/bin/" exec-path)
+
+(setenv "PATH" (concat "C:\\Program Files\Putty;" (concat "C:\\msys64\\usr\\bin;" (getenv "PATH"))))
+(setq tramp-default-method "plink")
+
+(setq org-agenda-files '("c:/Users/mmuggli/OneDrive/org/"))
+
