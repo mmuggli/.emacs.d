@@ -937,3 +937,7 @@ Otherwise split the current paragraph into one sentence per line."
 
 (setq org-agenda-files '("c:/Users/mmuggli/OneDrive/org/"))
 
+(setq org-enable-priority-commands t)
+(setq org-default-priority ?C)
+(setq org-lowest-priority ?D)
+(setq org-priority-highest ?A)
