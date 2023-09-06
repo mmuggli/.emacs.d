@@ -7,7 +7,8 @@
 
 ;; key bindings
 
-(global-set-key "\M-g" 'goto-line)
+                                        ;(global-set-key "\M-g" 'goto-line)
+(global-set-key (kbd "S-r") 'revert-buffer)
 (global-set-key (kbd "C-c C-k") 'compile)
 (global-set-key "\C-x\C-r" 'revert-buffer)
 (global-set-key "\C-xm" 'browse-url-at-point)
@@ -59,7 +60,8 @@
 
 ;(add-to-list 'load-path "/home/muggli/emacs-library/haskell-mode-2.8.0")
  (setq tramp-default-method "ssh")
-(setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/oak")
+(setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/nfs1")
+;(makunbound 'tramp-use-ssh-controlmaster-options)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -252,10 +254,10 @@ ip-address ? "))
 
 ;; (require 'tabbar)
 ;; (tabbar-mode)
-(require 'verilog-mode) 
+;(require 'verilog-mode) 
 ;(require 'python-mode) 
 ;(require 'python)
-(require 'ruby-mode)
+;(require 'ruby-mode)
 ;(require 'clojure-mode)
 
 (setq auto-mode-alist
@@ -388,10 +390,10 @@ ip-address ? "))
 
 ;(require 'python)
 
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (set (make-local-variable lisp-indent-function)
-                 'common-lisp-indent-function)))
+;; (add-hook 'lisp-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable lisp-indent-function)
+;;                  'common-lisp-indent-function)))
 
  
 (defun size-sort-buffers ()
@@ -418,7 +420,7 @@ ip-address ? "))
     (dolist (buff (buffer-list-fname-sorted)) (bury-buffer buff))
     (when (interactive-p) (list-buffers)))
 
- (defun buffer-list-fname-sorted ()r
+ (defun buffer-list-fname-sorted ()
     (sort (buffer-list) 
           (function (lambda (a b) 
                       (string<
@@ -473,6 +475,7 @@ ip-address ? "))
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
+
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "6c5a5c47749e7992b4da3011595f5470f33e19f29b10564cd4f62faebbe36b91" "8150ded55351553f9d143c58338ebbc582611adc8a51946ca467bd6fa35a1075" "1dacaddeba04ac1d1a2c6c8100952283b63c4b5279f3d58fb76a4f5dd8936a2c" "8d805143f2c71cfad5207155234089729bb742a1cb67b7f60357fdd952044315" "1e9001d2f6ffb095eafd9514b4d5974b720b275143fbc89ea046495a99c940b0" "80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
  '(fci-rule-color "#eee8d5")
@@ -501,6 +504,7 @@ ip-address ? "))
    (quote
     ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(org-agenda-files '("~/Dropbox/org/31oct2021.org"))
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(nanowrimo-today-goal 12500)
  '(nrepl-message-colors
@@ -699,16 +703,18 @@ endmodule
 
 (defalias 'list-buffers 'ibuffer)
 
- (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
+ ;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+ ;;  ;; Replace "sbcl" with the path to your implementation
+ ;;  (setq inferior-lisp-program "sbcl")
 
 
 ;; mac specific stuff
 (if (eq system-type 'darwin)
     (progn 
 					;(setq mac-option-modifier 'control)
-    (setq mac-command-modifier 'control) 
+      (setq mac-command-modifier 'control)
+      (setq mac-control-modifier 'super)
+
   (setq exec-path (cons "/Applications/ghc-7.10.3.app/Contents/bin" (cons "/usr/local/bin" exec-path)))
 					; merge mac clipboard with emacs clipboard (ahh, nice!)
   (setq x-select-enable-clipboard t)
@@ -716,8 +722,8 @@ endmodule
   (setq mac-option-modifier 'meta))
 
   ;(set-default-font "Consolas-10")
-  (unless (eq 49 (aref emacs-version 1))
-    (set-default-font "Consolas-10"))
+  ;; (unless (eq 49 (aref emacs-version 1))
+  ;;   (set-default-font "Consolas-10"))
 
   ; something for OS X if true
   ; optional something if not
@@ -775,7 +781,7 @@ endmodule
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
-
+(add-to-list `exec-path "/Users/muggli/.local/share/virtualenvs/p-L-5FESAF/bin/")
 (add-to-list `exec-path "/home/muggli/local/bin")
 (setenv "SBCL_HOME" nil)
 
@@ -937,7 +943,52 @@ Otherwise split the current paragraph into one sentence per line."
 
 (setq org-agenda-files '("c:/Users/mmuggli/OneDrive/org/"))
 
+;(add-to-list 'load-path "~/.emacs.d/elisp/use-package")
+;(load-library "use-package")
+;(load-library "cascadia")
+
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(avy-setup-default)
+(global-set-key (kbd "C-c C-j") 'avy-resume)
+(electric-indent-mode 't)
+
+
+(require 'lsp)
+(require 'lsp-haskell)
+;; Hooks so haskell and literate haskell major modes trigger LSP setup
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
+(add-hook 'python-mode-hook #'lsp)
+
+
 (setq org-enable-priority-commands t)
 (setq org-default-priority ?C)
 (setq org-lowest-priority ?D)
 (setq org-priority-highest ?A)
+
+(setq lsp-client-packages (remove-if (lambda (x) (eql 'lsp-ada x)) lsp-client-packages))
+(require 'dap-python)
+
+
+;(add-to-list 'tramp-remote-path "/Users/muggli/miniconda3/envs/mdm_python/bin")
+(add-to-list 'tramp-remote-path "/home/users7/mmuggli/miniconda3/envs/pyls/bin")
+(lsp-register-client
+    (make-lsp-client :new-connection (lsp-tramp-connection "pylsp")
+                     :major-modes '(python-mode)
+                     :remote? t
+                     :server-id 'pylsp-remote))
+
+;; from https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+(setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
+(setq vc-handled-backends nil)
+
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+(require 'dap-python)
+
