@@ -463,13 +463,13 @@ ip-address ? "))
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
- '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
+    ("6c5a5c47749e7992b4da3011595f5470f33e19f29b10564cd4f62faebbe36b91" "80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
+ '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)) t)
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
  '(nanowrimo-today-goal 12500)
  '(package-selected-packages
    (quote
-    (intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+    (slack greymatters-theme intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
 
 
 
@@ -843,3 +843,7 @@ Otherwise split the current paragraph into one sentence per line."
 (global-set-key [(control up)]   'gcm-scroll-up)
 
 
+;; menu-bar.el menu-set-font, x-select-font (or mouse-select-font for old fashion version)
+;; frame.el set-frame-font
+;; -ADBO-Source Code Pro-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
+;;(set-default-font "Source Code Pro-10")
