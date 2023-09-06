@@ -479,7 +479,7 @@ ip-address ? "))
    (quote
     ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "6c5a5c47749e7992b4da3011595f5470f33e19f29b10564cd4f62faebbe36b91" "8150ded55351553f9d143c58338ebbc582611adc8a51946ca467bd6fa35a1075" "1dacaddeba04ac1d1a2c6c8100952283b63c4b5279f3d58fb76a4f5dd8936a2c" "8d805143f2c71cfad5207155234089729bb742a1cb67b7f60357fdd952044315" "1e9001d2f6ffb095eafd9514b4d5974b720b275143fbc89ea046495a99c940b0" "80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
  '(fci-rule-color "#eee8d5")
- '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
+ '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)) t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
@@ -929,6 +929,10 @@ Otherwise split the current paragraph into one sentence per line."
 (global-set-key [(control up)]   'gcm-scroll-up)
 
 
+;; menu-bar.el menu-set-font, x-select-font (or mouse-select-font for old fashion version)
+;; frame.el set-frame-font
+;; -ADBO-Source Code Pro-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
+;;(set-default-font "Source Code Pro-10")
 (add-hook 'haskell-mode-hook
           (lambda () (local-set-key (kbd "C-c C-n") #'intero-restart)
             (local-set-key (kbd "C-c C-d") #'intero-mode)))
