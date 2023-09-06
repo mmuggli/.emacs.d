@@ -7,7 +7,8 @@
 
 ;; key bindings
 
-(global-set-key "\M-g" 'goto-line)
+                                        ;(global-set-key "\M-g" 'goto-line)
+(global-set-key (kbd "S-r") 'revert-buffer)
 (global-set-key (kbd "C-c C-k") 'compile)
 (global-set-key "\C-x\C-r" 'revert-buffer)
 (global-set-key "\C-xm" 'browse-url-at-point)
@@ -59,7 +60,8 @@
 
 ;(add-to-list 'load-path "/home/muggli/emacs-library/haskell-mode-2.8.0")
  (setq tramp-default-method "ssh")
-(setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/oak")
+(setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/nfs1")
+;(makunbound 'tramp-use-ssh-controlmaster-options)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -252,10 +254,10 @@ ip-address ? "))
 
 ;; (require 'tabbar)
 ;; (tabbar-mode)
-(require 'verilog-mode) 
+;(require 'verilog-mode) 
 ;(require 'python-mode) 
 ;(require 'python)
-(require 'ruby-mode)
+;(require 'ruby-mode)
 ;(require 'clojure-mode)
 
 (setq auto-mode-alist
@@ -388,10 +390,10 @@ ip-address ? "))
 
 ;(require 'python)
 
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (set (make-local-variable lisp-indent-function)
-                 'common-lisp-indent-function)))
+;; (add-hook 'lisp-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable lisp-indent-function)
+;;                  'common-lisp-indent-function)))
 
  
 (defun size-sort-buffers ()
@@ -418,7 +420,7 @@ ip-address ? "))
     (dolist (buff (buffer-list-fname-sorted)) (bury-buffer buff))
     (when (interactive-p) (list-buffers)))
 
- (defun buffer-list-fname-sorted ()r
+ (defun buffer-list-fname-sorted ()
     (sort (buffer-list) 
           (function (lambda (a b) 
                       (string<
@@ -462,14 +464,13 @@ ip-address ? "))
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default)))
- '(haskell-mode-hook (quote (turn-on-haskell-simple-indent)))
- '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
- '(nanowrimo-today-goal 12500)
+   '("80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default))
+ '(elfeed-feeds '("https://www.kernel.org/feeds/kdist.xml"))
+ '(haskell-mode-hook '(turn-on-haskell-simple-indent))
+ '(magit-diff-options '("--ignore-space-change" "--ignore-all-space"))
+ '(org-agenda-files '("~/Dropbox/org/31oct2021.org"))
  '(package-selected-packages
-   (quote
-    (intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet))))
+   '(lsp-mode rust-mode yasnippet dap-mode lsp-ivy lsp-treemacs json-mode treemacs lsp-ui lsp-haskell avy helm elfeed tuareg lua-mode use-package forth-mode intero python-black blacken jupyter yaml-mode md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy ess elein ein clojure-mode-extra-font-locking clojure-cheatsheet)))
 
 
 
@@ -620,16 +621,18 @@ endmodule
 
 (defalias 'list-buffers 'ibuffer)
 
- (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
+ ;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+ ;;  ;; Replace "sbcl" with the path to your implementation
+ ;;  (setq inferior-lisp-program "sbcl")
 
 
 ;; mac specific stuff
 (if (eq system-type 'darwin)
     (progn 
 					;(setq mac-option-modifier 'control)
-    (setq mac-command-modifier 'control) 
+      (setq mac-command-modifier 'control)
+      (setq mac-control-modifier 'super)
+
   (setq exec-path (cons "/Applications/ghc-7.10.3.app/Contents/bin" (cons "/usr/local/bin" exec-path)))
 					; merge mac clipboard with emacs clipboard (ahh, nice!)
   (setq x-select-enable-clipboard t)
@@ -637,8 +640,8 @@ endmodule
   (setq mac-option-modifier 'meta))
 
   ;(set-default-font "Consolas-10")
-  (unless (eq 49 (aref emacs-version 1))
-    (set-default-font "Consolas-10"))
+  ;; (unless (eq 49 (aref emacs-version 1))
+  ;;   (set-default-font "Consolas-10"))
 
   ; something for OS X if true
   ; optional something if not
@@ -696,7 +699,7 @@ endmodule
 
 (global-set-key (kbd "C-c g") 'magit-status)
 
-
+(add-to-list `exec-path "/Users/muggli/.local/share/virtualenvs/p-L-5FESAF/bin/")
 (add-to-list `exec-path "/home/muggli/local/bin")
 (setenv "SBCL_HOME" nil)
 
@@ -843,3 +846,51 @@ Otherwise split the current paragraph into one sentence per line."
 (global-set-key [(control up)]   'gcm-scroll-up)
 
 
+
+;(add-to-list 'load-path "~/.emacs.d/elisp/use-package")
+;(load-library "use-package")
+;(load-library "cascadia")
+
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(avy-setup-default)
+(global-set-key (kbd "C-c C-j") 'avy-resume)
+(electric-indent-mode 't)
+
+
+(require 'lsp)
+(require 'lsp-haskell)
+;; Hooks so haskell and literate haskell major modes trigger LSP setup
+(add-hook 'haskell-mode-hook #'lsp)
+(add-hook 'haskell-literate-mode-hook #'lsp)
+(add-hook 'python-mode-hook #'lsp)
+
+(setq org-enable-priority-commands t)
+(setq org-default-priority ?C)
+(setq org-lowest-priority ?D)
+(setq org-priority-highest ?A)
+
+(setq lsp-client-packages (remove-if (lambda (x) (eql 'lsp-ada x)) lsp-client-packages))
+(require 'dap-python)
+
+
+;(add-to-list 'tramp-remote-path "/Users/muggli/miniconda3/envs/mdm_python/bin")
+(add-to-list 'tramp-remote-path "/home/users7/mmuggli/miniconda3/envs/pyls/bin")
+(lsp-register-client
+    (make-lsp-client :new-connection (lsp-tramp-connection "pylsp")
+                     :major-modes '(python-mode)
+                     :remote? t
+                     :server-id 'pylsp-remote))
+
+;; from https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+(setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
+(setq vc-handled-backends nil)
+
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode -1)))
+(require 'dap-python)
