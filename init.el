@@ -1,23 +1,13 @@
+(setq debug-on-error t)
 (setq inhibit-splash-screen t)
 (print "Starting to process .emacs")
 ;(require 'labburn-theme)
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (tool-bar-mode -1)
 ;(require 'site-gentoo)
-
+(setq user-mail-address "mmuggli@bionanogenomics.com")
 ;; key bindings
 
-(global-set-key "\M-g" 'goto-line)
-(global-set-key (kbd "C-c C-k") 'compile)
-(global-set-key "\C-x\C-r" 'revert-buffer)
-(global-set-key "\C-xm" 'browse-url-at-point)
-(when window-system
-    (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
-;(global-set-key "\C-x\C-b" 'bs-show)
-(global-set-key "\C-x\C-b" 'list-buffers)
-
-;(global-set-key "\C-x\C-d" 'insert-rest)
-;(global-set-key "<next>" 
 
 ;; mouse bindings
 
@@ -61,16 +51,21 @@
  (setq tramp-default-method "ssh")
 (setq tramp-use-ssh-controlmaster-options "-S ~/.ssh/oak")
 
-(when (>= emacs-major-version 24)
-  (require 'package)
+;; (when (>= emacs-major-version 24)
+;;   (require 'package)
 
 
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;;   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
-;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize))
-
+;; ;  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)  
+;; ;  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;   (package-initialize))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
 
 
 
@@ -160,7 +155,7 @@ ip-address ? "))
 ")
         (comint-send-input))
 
-      (push "C:/clisp-2.34" exec-path)
+      ;; (push "C:/clisp-2.34" exec-path)
 
 
       (add-to-list 'load-path "c:/slime/") ; your SLIME directory
@@ -213,8 +208,8 @@ ip-address ? "))
 
 ;;(c-set-style "linux")
 ;;; always use 4 spaces
-;;(setq c-basic-offset 4)
-(setq default-tab-width 4)
+(setq c-basic-offset 4)
+(setq default-tab-width 8)
 ;;; don't use tabs
 (setq-default indent-tabs-mode nil); 
 
@@ -315,7 +310,7 @@ ip-address ? "))
 ;;  (mwheel-install))
 
 (ansi-color-for-comint-mode-on)
-
+(setq comint-inhibit-carriage-motion t) 
 
 
 ;; (custom-set-variables
@@ -358,7 +353,7 @@ ip-address ? "))
 ;;       (defconst display-time-24hr-format t)
 ;;       (display-time))
 ;;     (message "Get time.el from your distro."))
-(display-time-mode)
+;;(display-time-mode)
 
 ;; (custom-set-faces
 ;;   ;; custom-set-faces was added by Custom.
@@ -384,7 +379,7 @@ ip-address ? "))
 ;(add-to-list 'exec-path "/proj/isimco/users/muggli/python/python-2.6/bin")
 ;(add-to-list 'exec-path "/proj/isimco/users/muggli/local-lin64/bin")
                                         ;(add-to-list 'exec-path "/tools/xint/prod/bin")
-(add-to-list 'exec-path "/home/users7/mmuggli/local/bin")
+(add-to-list 'exec-path "/home/mmuggli/local/bin")
 ;(require 'ipython)
 
 ;(require 'python)
@@ -449,107 +444,116 @@ ip-address ? "))
 
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org>                               
-(defalias 'perl-mode 'cperl-mode)
-(setq cperl-indent-level 4)
+;(defalias 'perl-mode 'cperl-mode)
+;(setq cperl-indent-level 4)
 
 
 
 ;; ecb stuff
 ;(require 'ecb) ;; alternately use  (require 'ecb-autoloads) and then do ecb-activate when you need it
 
+;; disable custom set variables
+ ;; '(ansi-color-faces-vector
+ ;;   [default bold shadow italic underline bold bold-italic bold])
+ ;; '(ansi-color-names-vector
+ ;;   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
+ ;; '(ansi-term-color-vector
+ ;;   [unspecified "#2e2e2e" "#bc8383" "#7f9f7f" "#d0bf8f" "#6ca0a3" "#dc8cc3" "#8cd0d3" "#b6b6b6"] t)
+ ;; '(cua-global-mark-cursor-color "#2aa198")
+ ;; '(cua-normal-cursor-color "#657b83")
+ ;; '(cua-overwrite-cursor-color "#b58900")
+ ;; '(cua-read-only-cursor-color "#859900")
+ ;; '(fci-rule-color "#eee8d5")
+ ;; '(highlight-changes-colors '("#d33682" "#6c71c4"))
+ ;; '(highlight-symbol-colors
+ ;;   (--map
+ ;;    (solarized-color-blend it "#fdf6e3" 0.25)
+ ;;    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
+ ;; '(highlight-symbol-foreground-color "#586e75")
+ ;; '(highlight-tail-colors
+ ;;   '(("#eee8d5" . 0)
+ ;;     ("#B4C342" . 20)
+ ;;     ("#69CABF" . 30)
+ ;;     ("#69B7F0" . 50)
+ ;;     ("#DEB542" . 60)
+ ;;     ("#F2804F" . 70)
+ ;;     ("#F771AC" . 85)
+ ;;     ("#eee8d5" . 100)))
+ ;; '(hl-bg-colors
+ ;;   '("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342"))
+ ;; '(hl-fg-colors
+ ;;   '("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3"))
+ ;; '(hl-paren-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
+ ;; '(nrepl-message-colors
+ ;;   '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4"))
+ ;; '(pdf-view-midnight-colors '("#6a737d" . "#fffbdd"))
+ ;; '(pos-tip-background-color "#eee8d5")
+ ;; '(pos-tip-foreground-color "#586e75")
+ ;; '(rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face t)
+ ;; '(rainbow-identifiers-cie-l*a*b*-color-count 1024 t)
+ ;; '(rainbow-identifiers-cie-l*a*b*-lightness 80 t)
+ ;; '(rainbow-identifiers-cie-l*a*b*-saturation 25 t)
+ ;; '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ ;; '(term-default-bg-color "#fdf6e3")
+ ;; '(term-default-fg-color "#657b83")
+ ;; '(vc-annotate-background nil)
+ ;; '(vc-annotate-background-mode nil)
+ ;; '(vc-annotate-color-map
+ ;;   '((20 . "#dc322f")
+ ;;     (40 . "#c85d17")
+ ;;     (60 . "#be730b")
+ ;;     (80 . "#b58900")
+ ;;     (100 . "#a58e00")
+ ;;     (120 . "#9d9100")
+ ;;     (140 . "#959300")
+ ;;     (160 . "#8d9600")
+ ;;     (180 . "#859900")
+ ;;     (200 . "#669b32")
+ ;;     (220 . "#579d4c")
+ ;;     (240 . "#489e65")
+ ;;     (260 . "#399f7e")
+ ;;     (280 . "#2aa198")
+ ;;     (300 . "#2898af")
+ ;;     (320 . "#2793ba")
+ ;;     (340 . "#268fc6")
+ ;;     (360 . "#268bd2")))
+ ;; '(vc-annotate-very-old-color nil)
+ ;; '(weechat-color-list
+ ;;   '(unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))
+ ;; '(xterm-color-names
+ ;;   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"])
+ ;; '(xterm-color-names-bright
+ ;;   ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"])
+
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
- '(ansi-term-color-vector
-   [unspecified "#2e2e2e" "#bc8383" "#7f9f7f" "#d0bf8f" "#6ca0a3" "#dc8cc3" "#8cd0d3" "#b6b6b6"] t)
  '(compilation-message-face 'default)
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#657b83")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
+ '(cperl-invalid-face 'default)
  '(custom-safe-themes
-   '("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "6c5a5c47749e7992b4da3011595f5470f33e19f29b10564cd4f62faebbe36b91" "8150ded55351553f9d143c58338ebbc582611adc8a51946ca467bd6fa35a1075" "1dacaddeba04ac1d1a2c6c8100952283b63c4b5279f3d58fb76a4f5dd8936a2c" "8d805143f2c71cfad5207155234089729bb742a1cb67b7f60357fdd952044315" "1e9001d2f6ffb095eafd9514b4d5974b720b275143fbc89ea046495a99c940b0" "80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default))
- '(fci-rule-color "#eee8d5")
+   '("3433a30aa4ecd3ba38314cec0b473b8a55ec00d43c1b700a0caeef1b5ac3bc19" "f5b6be56c9de9fd8bdd42e0c05fecb002dedb8f48a5f00e769370e4517dde0e8" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "6c5a5c47749e7992b4da3011595f5470f33e19f29b10564cd4f62faebbe36b91" "8150ded55351553f9d143c58338ebbc582611adc8a51946ca467bd6fa35a1075" "1dacaddeba04ac1d1a2c6c8100952283b63c4b5279f3d58fb76a4f5dd8936a2c" "8d805143f2c71cfad5207155234089729bb742a1cb67b7f60357fdd952044315" "1e9001d2f6ffb095eafd9514b4d5974b720b275143fbc89ea046495a99c940b0" "80ae3a89f1eca6fb94a525004f66b544e347c6f756aaafb728c7cdaef85ea1f5" default))
  '(haskell-mode-hook '(turn-on-haskell-simple-indent) t)
- '(highlight-changes-colors '("#d33682" "#6c71c4"))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#fdf6e3" 0.25)
-    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
- '(highlight-symbol-foreground-color "#586e75")
- '(highlight-tail-colors
-   '(("#eee8d5" . 0)
-     ("#B4C342" . 20)
-     ("#69CABF" . 30)
-     ("#69B7F0" . 50)
-     ("#DEB542" . 60)
-     ("#F2804F" . 70)
-     ("#F771AC" . 85)
-     ("#eee8d5" . 100)))
- '(hl-bg-colors
-   '("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342"))
- '(hl-fg-colors
-   '("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3"))
- '(hl-paren-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(magit-diff-options '("--ignore-space-change" "--ignore-all-space"))
  '(nanowrimo-today-goal 12500)
- '(nrepl-message-colors
-   '("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(lsp-ui dap-mode lsp-mode tabbar solarized-theme color-theme-solarized github-modern-theme arjen-grey-theme goose-theme grayscale-theme greymatters-theme klere-theme kosmos-theme spacegray-theme restclient yaml-mode intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy elein ein clojure-mode-extra-font-locking clojure-cheatsheet))
- '(pdf-view-midnight-colors '("#6a737d" . "#fffbdd"))
- '(pos-tip-background-color "#eee8d5")
- '(pos-tip-foreground-color "#586e75")
- '(rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face t)
- '(rainbow-identifiers-cie-l*a*b*-color-count 1024 t)
- '(rainbow-identifiers-cie-l*a*b*-lightness 80 t)
- '(rainbow-identifiers-cie-l*a*b*-saturation 25 t)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(term-default-bg-color "#fdf6e3")
- '(term-default-fg-color "#657b83")
- '(vc-annotate-background nil)
- '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   '((20 . "#dc322f")
-     (40 . "#c85d17")
-     (60 . "#be730b")
-     (80 . "#b58900")
-     (100 . "#a58e00")
-     (120 . "#9d9100")
-     (140 . "#959300")
-     (160 . "#8d9600")
-     (180 . "#859900")
-     (200 . "#669b32")
-     (220 . "#579d4c")
-     (240 . "#489e65")
-     (260 . "#399f7e")
-     (280 . "#2aa198")
-     (300 . "#2898af")
-     (320 . "#2793ba")
-     (340 . "#268fc6")
-     (360 . "#268bd2")))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   '(unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))
- '(xterm-color-names
-   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"])
- '(xterm-color-names-bright
-   ["#fdf6e3" "#cb4b16" "#93a1a1" "#839496" "#657b83" "#6c71c4" "#586e75" "#002b36"]))
+   '(origami zmq scala-mode avy tree-sitter-indent tree-sitter-langs tree-sitter highlight-indent-guides flycheck rust-mode parchment-theme material-theme vlf ess python-black lsp-ui dap-mode lsp-mode tabbar solarized-theme color-theme-solarized github-modern-theme arjen-grey-theme goose-theme grayscale-theme greymatters-theme klere-theme kosmos-theme spacegray-theme restclient yaml-mode intero yasnippet lsp-haskell exwm nanowrimo md4rd markdown-mode zenburn-theme labburn-theme rust-playground flymake-rust flycheck-rust cargo clojure-mode websocket w3 request rainbow-delimiters python-mode multi-term icicles haskell-mode git-rebase-mode git-commit-mode gerrit-download doremi-cmd cperl-mode column-enforce-mode cl-generic auto-complete auctex visual-fill-column auctex cdlatex clojure-mode cider w3m nrepl-sync magit haskell-mode flyspell-lazy elein ein clojure-mode-extra-font-locking clojure-cheatsheet)))
 
 
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(font-lock-comment-face ((t (:foreground "seagreen"))))
+;;  '(font-lock-function-name-face ((t (:foreground "darkgoldenrod"))))
+;;  '(font-lock-keyword-face ((t (:foreground "blue"))))
+;;  '(font-lock-type-face ((t (:foreground "steelblue"))))
+;;  '(font-lock-variable-name-face ((t (:foreground "black")))))
 
 
 
@@ -570,8 +574,8 @@ endmodule
       (if (file-exists-p "c:/emacs-22.1/share/doc/hyperspec/HyperSpec")
           "file:///c:/emacs-22.1/share/doc/hyperspec/HyperSpec/"
         "http://www.lispworks.com/reference/HyperSpec/"))
-(require 'tramp)
-(setq tramp-default-method "sshx")
+;;(require 'tramp)
+;;(setq tramp-default-method "sshx")
 
 (setq xscheme-default-command-line "scheme --library \"C:\\Program Files\\MIT-GNU Scheme\\lib\"") 
 (add-to-list 'exec-path "C:/Program Files/MIT-GNU Scheme/bin/")
@@ -741,7 +745,8 @@ endmodule
 
 (setq auto-mode-alist (append (list (cons "\\.Plw$" 'Plw-mode))
                    auto-mode-alist))
-
+(setq auto-save-interval 6000)
+(setq auto-save-timeout 6000)
 
 
 
@@ -765,11 +770,10 @@ endmodule
 
 (window-number-meta-mode)
 
-(global-set-key (kbd "C-c g") 'magit-status)
 
 
-(add-to-list `exec-path "/home/users7/mmuggli/local/bin")
-(add-to-list `exec-path "/home/users7/mmuggli/miniconda3/envs/bionano_python3.0_mdmfork/bin/")
+(add-to-list `exec-path "/home/mmuggli/local/bin")
+(add-to-list `exec-path "/home/mmuggli/miniconda3/envs/bionano_python3.0_mdmfork/bin/")
 (setenv "SBCL_HOME" nil)
 
 ;;(setenv "LD_LIBRARY_PATH" "/home/muggli/git/cosmo/3rd_party_inst/boost/lib")
@@ -810,11 +814,11 @@ endmodule
 
 
 
-(when (and (fboundp 'server-start)); (string-equal (getenv "TERM") 'xterm))
-  (server-start)
-  (defun fp-kill-server-with-buffer-routine ()
-    (and server-buffer-clients (server-done)))
-  (add-hook 'kill-buffer-hook 'fp-kill-server-with-buffer-routine))
+;; (when (and (fboundp 'server-start)); (string-equal (getenv "TERM") 'xterm))
+;;   (server-start)
+;;   (defun fp-kill-server-with-buffer-routine ()
+;;     (and server-buffer-clients (server-done)))
+;;   (add-hook 'kill-buffer-hook 'fp-kill-server-with-buffer-routine))
 
 (setenv "EDITOR" "emacsclient")
 ;(require 'python-mode)
@@ -824,7 +828,7 @@ endmodule
 
 
 
-(setq py-python-command-args '("--matplotlib" "--colors" "LightBG"))
+;; (setq py-python-command-args '("--matplotlib" "--colors" "LightBG"))
 
 (setq backup-directory-alist
       `((".*" . ,"~/.emacs-autosave/")))
@@ -861,7 +865,6 @@ endmodule
 ;;     (fill-paragraph P)))
 
 
-(global-set-key (kbd "M-q") 'ales/fill-paragraph)
 (put 'downcase-region 'disabled nil)
 
 
@@ -923,13 +926,90 @@ endmodule
 (global-set-key [(control up)]   'gcm-scroll-up)
 
 
+;(require 'lsp)
+
+;(require 'lsp-mode)
+;(add-hook 'python-mode-hook #'lsp)
+;(add-hook 'perl-mode-hook #'lsp)
+(setq vc-handled-backends nil)
+
+(defun my-window-layout ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-right)
+  (split-window-right)
+  (balance-windows))
+
+(defun my-six-window-layout ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-right)
+  (split-window-right)
+(balance-windows)
+  (split-window-right)
+  (split-window-right)
+  (split-window-right)
+(balance-windows)
+  (split-window-right)
+  (split-window-right)
+  (split-window-right)
+  (balance-windows))
+
+
+;; (defface cperl-my-trailing-spaces-face
+;;   '((((class color))
+;;      ;; blah, blah
+;;      ;; define your tastes (background, foreground)
+;;      ))
+;;   "My face for trailing spaces in cperl mode"
+;;   :group 'cperl-mode)
+;;                                         ;cperl-my-trailing-spaces-face
+;;  ; Here is the most important part. It says to add
+;;                           ; this face to the customizable group cperl-mode
+;;     ;; now you can "bind" this face to cperl-invalid-face
+;;     (set-default 'cperl-invalid-face 'cperl-my-trailing-spaces-face)
+;; cperl-my-trailing-spaces-face
+;(setq tsc-dyn-get-from '(:compilation))
+(global-tree-sitter-mode)
+;; (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(setq tree-sitter-debug-jump-buttons t)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+(global-set-key "\M-g" 'goto-line)
+(global-set-key (kbd "C-c C-k") 'compile)
+(global-set-key "\C-x\C-r" 'revert-buffer)
+
+(global-set-key "\C-xm" 'browse-url-at-point)
+(when window-system
+    (global-unset-key "\C-z")) ; iconify-or-deiconify-frame (C-x C-z)
+;(global-set-key "\C-x\C-b" 'bs-show)
+(global-set-key "\C-x\C-b" 'list-buffers)
+
+;(global-set-key "\C-x\C-d" 'insert-rest)
+;(global-set-key "<next>" 
+
+(global-set-key "\C-x\C-h" 'tree-sitter-hl-mode)
+(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "M-q") 'ales/fill-paragraph)
+
 (add-hook 'haskell-mode-hook
           (lambda () (local-set-key (kbd "C-c C-n") #'intero-restart)
             (local-set-key (kbd "C-c C-d") #'intero-mode)))
 (global-set-key (kbd "C-c C-n") 'intero-restart)
 (global-set-key (kbd "C-c C-d") 'intero-mode)
 
-(require 'lsp-mode)
-(add-hook 'python-mode-hook #'lsp)
-(add-hook 'perl-mode-hook #'lsp)
-(setq vc-handled-backends nil)
+(global-set-key "\C-x\C-m" 'my-window-layout)
+(global-set-key "\C-x\C-g" 'calendar)
+
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "C-x l") 'avy-goto-line)
+(global-set-key (kbd "C-x w") 'avy-goto-word-1)
+;(global-set-key (kbd "C-x e") 'avy-goto-word-0)
+;(global-set-key (kbd "C-x e") 'kmacro-end-and-call-macro)
